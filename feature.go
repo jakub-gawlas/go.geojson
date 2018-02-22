@@ -11,6 +11,7 @@ type Feature struct {
 	BoundingBox []float64              `json:"bbox,omitempty"`
 	Geometry    *Geometry              `json:"geometry"`
 	Properties  map[string]interface{} `json:"properties"`
+	Tippecanoe  map[string]interface{} `json:"tippecanoe,omitempty"`
 	CRS         map[string]interface{} `json:"crs,omitempty"` // Coordinate Reference System Objects are not currently supported
 }
 
@@ -78,6 +79,9 @@ func (f Feature) MarshalJSON() ([]byte, error) {
 	}
 	if f.CRS != nil && len(f.CRS) != 0 {
 		fea.CRS = f.CRS
+	}
+	if f.Tippecanoe != nil && len(f.Tippecanoe) != 0 {
+		fea.Tippecanoe = f.Tippecanoe
 	}
 
 	return json.Marshal(fea)
